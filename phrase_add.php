@@ -14,7 +14,15 @@
           <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <h1 class="display-3">I say YES! to ...</h1>
-
+            <form method="get">
+              <select name="phrase">
+                <option value="ChickenNuggets">Chicken Nuggets</option>
+                <option value="Ketchup">Ketchup</option>
+                <option value="HdM">HdM</option>
+                <option value="Schnittfeld">Schnittfeld</option>
+              </select>
+              <button type="submit" name="btn-save" value="1">Los geht's</button>
+            </form>
           </div>
 
         </div>
