@@ -102,3 +102,54 @@ We add the following code to the top of the file in order to read the contents o
 In the HTML-Part, we just echo the content of $text in order to put the file content to the right place:
 
 <?php echo $text ?>
+
+## Adding more phrases. 
+
+In case we want to add new phrases, we can just change the way PHP stores data to the file. Right now, it overwrites the file, whenever we submit the form. By adding the parameter FILE_APPEND to the function call in phrases_add.php: 
+
+```
+    file_put_contents($filename, $text, FILE_APPEND);
+```
+
+Check it out...
+
+If you open the phrase_list.php file, you will notice that the whole content is written in one line. This is probably not what we want. In order to create multiple lines, we first add a line end to each of the new phrases we enter. This is done by adding `"\n"` to the string we want to put in the file. In file.txt, we already see the difference - but not in the HTML-file. There are multiple ways to fix this. The easiest is to just put a `<pre>` tag around the text. It looks not so beautiful.  
+
+## Reading the content line by line
+
+What we want to do, is to read the content line by line. In phrase_list.php, we replace `file_put_contents()` with `file()`. 
+
+In the head, we put: 
+
+```
+  $statements = file($filename, FILE_IGNORE_NEW_LINES);
+```
+
+In the body, we need to loop through the statements-array, now: 
+```
+    <?php 
+    foreach ($statements as $stmt){
+        echo "<p>". $stmt . "</p>"; 
+    }
+    ?>
+```
+
+## Create your first config file 
+
+We want to put the name of the file that we use to store the information into a centralized file. What we will do, is create a new file called `config.php`. We will use that file in every other file in order to store centralized information. For now, we only put the following into that file: 
+
+```
+<?php
+  $filename = "file.txt"; 
+?>
+
+```
+
+We replace the name that determines the filename in our other files and import the config-file: 
+
+```
+include('config.php');
+```
+
+
+- 

@@ -1,3 +1,10 @@
+<?php
+  if (isset($_GET['btn-save'])){
+      $text = "I Say Yes to " . $_GET['phrase'];
+      $filename = "phrase.txt";
+      file_put_contents($filename, $text);
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
