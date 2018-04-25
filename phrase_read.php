@@ -1,15 +1,12 @@
 <?php
   include('config.php');
+  
+  // connect to database
+  $link = mysqli_connect("localhost", "root", "", "i218_phrases_live");
 
-  if (isset($_GET['btn-save'])){
-      $text = "I Say Yes to " . $_GET['phrase'] . "\n";
-      // file_put_contents($filename, $text, FILE_APPEND);
-      $link = mysqli_connect("localhost", "root", "", "i218_phrases_live");
-      $db_query = "INSERT INTO `phrases` (`ID`, `text`, `insertdate`) VALUES (NULL, '" . $text . "', NOW());";
-      // echo $db_query; 
-      $result = $link->query($db_query);
-      
-  }
+  // query database
+  $result = $link->query('SELECT * FROM phrases');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,17 +23,19 @@
   <body>
           <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-3">I say YES! to ...</h1>
-            <form method="get">
-              <select name="phrase">
-                <option value="ChickenNuggets">Chicken Nuggets</option>
-                <option value="Ketchup">Ketchup</option>
-                <option value="HdM">HdM</option>
-                <option value="Schnittfeld">Schnittfeld</option>
-              </select>
-              <button type="submit" name="btn-save" value="1">Los geht's</button>
-            </form>
-
+            <table>
+           <?php 
+              // process results
+              while ($row = mysqli_fetch_row($result)){
+                echo "<tr>";
+                echo "<td>" . $row[0] . "</td>";
+                echo "<td>" . $row[1] . "</td>";
+                echo "<td>" . $row[2] . "</td>";
+                echo "</tr>";
+              }
+           ?>
+            </table>
+          
           </div>
 
         </div>
