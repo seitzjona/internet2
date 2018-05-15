@@ -1,10 +1,10 @@
 <?php  
 	include('config.php');
-    if (isset($_GET['btn-save'])){
-      $text = "I Say Yes to " . $_GET['phrase'] . "!" . "\n";
+    if (isset($_POST['btn-save'])){
+      $text = "I Say Yes to " . $text = $_POST['phrase_1'] . " " . $_POST['phrase_2'] ."" . $_POST['name'] . "!" . "\n";
       // file_put_contents($filename, $text, FILE_APPEND);
       $link = mysqli_connect($db_host, $db_user, $db_password, $db_name);  
-      $db_query = "INSERT INTO `phrases` (`ID`, `text`, `insertdate`) VALUES (NULL, '" . $text . "', NOW());";
+      $db_query = "INSERT INTO `phrases` (`ID`, `phrase`, `recipient`) VALUES (NULL, '" . $text . "', NOW());";
       //echo $db_query; 
       $result = $link->query($db_query);
       header("Location:phrase_read.php");
@@ -25,9 +25,8 @@
   <body>
         <div class="jumbotron jumbotron-fluid" style="background-color: #031a4c">
           <div class="container">
-            
-              <form method="get">
-                <h1 class="display-3" style="color: white">I say YES! to ...</h1>
+                <h1 class="display-3" style="color: white">I say YES! to ...</h1>            
+              <form method="post">
                 <select name="phrase_1">
                   <option value="Chicken Nuggets">Chicken Nuggets</option>
                   <option value="Ketchup">Ketchup</option>
@@ -35,10 +34,10 @@
                   <option value="HdM">HdM</option>
                 </select>
                 <select name="phrase_2">
-                  <option value="mit S&uuml;&szlig;sauer,">mit S&uuml;&szlig;sauer</option>
-                  <option value="mit Zwiebeln,">mit Zwiebeln</option>
-                  <option value="mit Pommes,">mit Pommes</option>
-                  <option value="mit allem und viel scharf,">mit allem und viel scharf</option>
+                  <option value="mit S&uuml;&szlig;sauer, ">mit S&uuml;&szlig;sauer</option>
+                  <option value="mit Zwiebeln, ">mit Zwiebeln</option>
+                  <option value="mit Pommes, ">mit Pommes</option>
+                  <option value="mit allem und viel scharf, ">mit allem und viel scharf</option>
                 </select>
                 <label> 
                     <input type="text" name="name">
