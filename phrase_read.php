@@ -1,25 +1,5 @@
-   <table class="table-striped table">
-        <th>ID</th>
-        <th>Phrase</th>
 <?php
   include('config.php');
-
-  // $statements = file($filename, FILE_IGNORE_NEW_LINES);
-    
-        $stmt = "SELECT * FROM `phrases`";
-        $result = $link->query($stmt);
-
-        if ($result->num_rows > 0){
-            while ($row = mysqli_fetch_row($result)){
-            echo "<tr>\n";
-            echo "<td>" . $row[0] . "</td>\n";
-            echo "<td>" . $row[1] . "</td>\n";
-            echo "</tr>";
-            }
-        }
-        else {
-            echo "<tr><td colspan='2'>No data found</td></tr>";
-        }
         ?>
     </table>
 <!DOCTYPE html>
@@ -37,22 +17,27 @@
   <body>
         <div class="jumbotron jumbotron-fluid" style="background-color: #031a4c">
           <div class="container">
-            <h1 class="display-3" style="color: white">
-                <?php 
+            <h1 class="display-3" style="color: white">We say YES!</h1>
+                <table class="table-striped table" style="color: white">
+                    <th>ID</th>
+                    <th>Phrase</th>
+                    <?php
                     $stmt = "SELECT * FROM `phrases`";
                     $result = $link->query($stmt);
-
-                      if ($result->num_rows > 0){
+            
+                    if ($result->num_rows > 0){
                         while ($row = mysqli_fetch_row($result)){
-                            echo $row[0];
-                            echo $row[1];
-                        }               
-                      }
-                      else {
-                        // nothing found :-(
-                      } 
-                  ?>
-            </h1>
+                        echo "<tr>\n";
+                        echo "<td>" . $row[0] . "</td>\n";
+                        echo "<td>" . $row[1] . "</td>\n";
+                        echo "</tr>";
+                        }
+                    }
+                    else {
+                        echo "<tr><td colspan='2'>No data found</td></tr>";
+                    }
+                    ?>
+                </table>
             <a href="phrase_add.php">
                 <button type="submit" class="btn btn-default" style="background-color: yellow">new phrase</button>    
             </a>
